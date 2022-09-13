@@ -61,7 +61,9 @@ function openStream() {
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.play();
+    if (video.video.srcObject) {
+        video.play();
+    }
 }
 
 const peer = new Peer();
@@ -77,34 +79,40 @@ peer.on('open', (id) => {
 //Caller
 btnCall.onclick = function () {
     const id = remoteId.value;
-    openStream().then((stream) => {
-        playStream('localStream', stream);
-        const call = peer.call(id, stream);
-        call.on('stream', (remoteStream) =>
-            playStream('remoteStream', remoteStream),
-        );
-    }).catch((err) => console.log(err));
-};
-
-peer.on('call', (call) => {
-    openStream().then((stream) => {
-        call.answer(stream);
-        playStream('localStream', stream);
-        call.on('stream', (remoteStream) =>
-            playStream('remoteStream', remoteStream),
-        );
-    }).catch((err) => console.log(err));
-});
-
-listUser.addEventListener('click', function (e) {
-    if (e.target.tagName === 'LI') {
-        const id = e.target.id;
-        openStream().then((stream) => {
+    openStream()
+        .then((stream) => {
             playStream('localStream', stream);
             const call = peer.call(id, stream);
             call.on('stream', (remoteStream) =>
                 playStream('remoteStream', remoteStream),
             );
-        }).catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+};
+
+peer.on('call', (call) => {
+    openStream()
+        .then((stream) => {
+            call.answer(stream);
+            playStream('localStream', stream);
+            call.on('stream', (remoteStream) =>
+                playStream('remoteStream', remoteStream),
+            );
+        })
+        .catch((err) => console.log(err));
+});
+
+listUser.addEventListener('click', function (e) {
+    if (e.target.tagName === 'LI') {
+        const id = e.target.id;
+        openStream()
+            .then((stream) => {
+                playStream('localStream', stream);
+                const call = peer.call(id, stream);
+                call.on('stream', (remoteStream) =>
+                    playStream('remoteStream', remoteStream),
+                );
+            })
+            .catch((err) => console.log(err));
     }
 });
