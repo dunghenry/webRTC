@@ -9,14 +9,24 @@
 </head>
 
 <body>
-    <div id="my-peer"></div>
-    <video id="localStream" width="300" controls></video>
+    <div id="chat">
+        <p>Online users: </p>
+        <ul id="listUser"></ul>
+        <input type="text" id="remoteId" placeholder="Remote ID" />
+        <button id="btnCall">Call</button>
+        <br /><br />
+        <div id="my-peer"></div>
+        <br />
+        <video id="localStream" width="300" controls></video>
+        <br /><br />
+        <video id="remoteStream" width="300" controls></video>
+        <br /><br />
+    </div>
+    <div id="register">
+        <input type="text" id="username" placeholder="Enter your username" />
+        <button id="btnRegister">Register</button>
+    </div>
     <br /><br />
-    <video id="remoteStream" width="300" controls></video>
-    <br /><br />
-
-    <input type="text" id="remoteId" />
-    <button id="btnCall">Call</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
         integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
