@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000');
+const socket = io('https://stream-socketio.herokuapp.com/');
 const remoteId = document.getElementById('remoteId');
 const btnCall = document.getElementById('btnCall');
 const usernameInput = document.getElementById('username');
@@ -54,7 +54,7 @@ socket.on('user_disconnect', (username) => {
     }
 });
 function openStream() {
-    const config = { audio: false, video: true };
+    const config = { audio: true, video: true };
     return navigator.mediaDevices.getUserMedia(config);
 }
 
