@@ -83,7 +83,7 @@ btnCall.onclick = function () {
         call.on('stream', (remoteStream) =>
             playStream('remoteStream', remoteStream),
         );
-    });
+    }).catch((err) => console.log(err));
 };
 
 peer.on('call', (call) => {
@@ -93,7 +93,7 @@ peer.on('call', (call) => {
         call.on('stream', (remoteStream) =>
             playStream('remoteStream', remoteStream),
         );
-    });
+    }).catch((err) => console.log(err));
 });
 
 listUser.addEventListener('click', function (e) {
@@ -105,6 +105,6 @@ listUser.addEventListener('click', function (e) {
             call.on('stream', (remoteStream) =>
                 playStream('remoteStream', remoteStream),
             );
-        });
+        }).catch((err) => console.log(err));
     }
 });
