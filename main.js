@@ -61,7 +61,7 @@ function openStream() {
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    if (video.video.srcObject) {
+    if (video.srcObject) {
         video.play();
     }
 }
