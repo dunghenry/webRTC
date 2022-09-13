@@ -60,9 +60,19 @@ function openStream() {
 
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
+    video.src = '';
     video.srcObject = stream;
-    if (video.srcObject) {
-        video.play();
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise
+            .then((_) => {
+                // Automatic playback started!
+                // Show playing UI.
+            })
+            .catch((error) => {
+                // Auto-play was prevented
+                // Show paused UI.
+            });
     }
 }
 
